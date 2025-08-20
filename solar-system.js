@@ -296,7 +296,7 @@ window.addEventListener('scroll', () => {
       const ex = cx + earthP.x * k;
       const ey = cy + earthP.y * k;
 
-      const moonAU = 0.01057; // mean semi-major moon in AU
+      const moonAU = 0.02057; // mean semi-major moon in AU
       const moonPeriodDays = 27.321661;
       const days = daysSinceJ2000(date);
       const Mmoon = 2*Math.PI * ((days % moonPeriodDays) / moonPeriodDays);
