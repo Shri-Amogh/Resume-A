@@ -30,7 +30,7 @@
       width: 100%;
       text-align: center;
       color: rgba(255,255,255,0.35);
-      font-size: 120px;
+      
       font-weight: bold;
       pointer-events: none;
 
@@ -45,11 +45,21 @@
 
 
     .top-text {
+      font-size: 120px;
       top: 80px;
     }
 
     .bottom-text {
+      font-size: 120px;
       bottom: 80px;
+    }
+
+    .down1-text {
+      position: absolute;
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      font-size: 40px;
+      top: 290vh;
     }
 
     #hud {
@@ -76,9 +86,9 @@
   width: 250px;
   padding: 20px;
   background: rgba(49, 49, 49, 0.65);
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.6);
   border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
   font-family: Arial, sans-serif;
   position: sticky;   /* <--- magic */
   top: 20%;           /* stays 20% from top while scrolling */
@@ -107,7 +117,7 @@
   .bottom-section {
     flex-direction: column; /* stack vertically */
     gap: 20px;
-    margin-top: 120vh;
+    margin-top: 270vh;
     align-self: center;
     
     
@@ -150,8 +160,33 @@
 <div class="background-text top-text">Hello!</div>
 <div id="bottomText" class="background-text bottom-text">I am Amogh</div>
 
+<div id="sunText" style="
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 2rem;
+  text-align: center;
+  font-weight: bold ;
+  pointer-events: none;
+  
+  opacity: 0;
+  
+  z-index: 1000;
+">
+
+ Contact me:<br>
+ Email:&nbsp;<a href="mailto:as6249@drexel.edu" class="button">as6249@drexel.edu</a><br>
+ Phone:&nbsp;<a href="tel: +1 (445) 256-2462" class="button"> +1 (445) 256-2462</a>
+
+</div>
+
+
 <!-- Your solar system canvas -->
 <canvas id="solarCanvas"></canvas>
+
+<div class="down1-text">Here are some cool things I did</div>
 
 <!-- HUD for current simulation date -->
 <div id="hud"></div>
@@ -177,7 +212,7 @@
 <script>
 // --- Scroll-to-time control ---
 let scrollOffset = 0; // in pixels
-const timeSpeedFactor = 10;
+const timeSpeedFactor = 1;
 
 window.addEventListener('scroll', () => {
   scrollOffset = window.scrollY;
@@ -210,6 +245,9 @@ window.addEventListener('scroll', () => {
     </ul>
   </div>
 </div>
+
+
+
 
 
 
