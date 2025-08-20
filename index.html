@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solar System with Personal Text</title>
+<style>
+    body {
+      margin: 0;
+      background: black;
+      overflow-y: scroll; /* allow vertical scrolling */
+      font-family: Arial, sans-serif;
+      height: 200vh; /* make page taller so you can scroll */
+    }
+
+    /* Put the canvas on top */
+    canvas {
+      position: fixed; /* keep canvas visible while scrolling */
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      display: block;
+    }
+
+    /* Background text */
+    .background-text {
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      color: rgba(255,255,255,0.35);
+      font-size: 120px;
+      font-weight: bold;
+      pointer-events: none;
+
+      }
+
+      .stuck {
+      position: fixed;
+      top: 55%;      /* center vertically on Sun */
+      left: 50%;     /* center horizontally on Sun */
+      transform: translate(-50%, -50%);
+      }
+
+
+    .top-text {
+      top: 80px;
+    }
+
+    .bottom-text {
+      bottom: 80px;
+    }
+
+    #hud {
+      position: fixed; /* keep HUD visible */
+      top: 10px;
+      left: 10px;
+      color: rgb(255, 255, 255, 0.7);
+      font-family: monospace;
+      z-index: 5;
+    }
+
+.bottom-section {
+  position: relative;
+  margin-top: 150vh;  /* appear after solar system */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 60px;
+  z-index: 3;
+  min-height: 100vh; /* gives room to scroll so sticky works */
+}
+
+.info-box {
+  width: 250px;
+  padding: 20px;
+  background: rgba(49, 49, 49, 0.65);
+  color: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  font-family: Arial, sans-serif;
+  position: sticky;   /* <--- magic */
+  top: 20%;           /* stays 20% from top while scrolling */
+  align-self: flex-start;
+}
+
+.info-box h2 {
+  margin-top: 0;
+  font-size: 20px;
+}
+.info-box ul {
+  padding-left: 20px;
+}
+
+.center-text {
+  font-size: 60px;
+  color: white;
+  pointer-events: none;
+  position: sticky;
+  top: 40%;   /* also sticky */
+}
+
+
+/* Responsive for phones */
+@media (max-width: 700px) {
+  .bottom-section {
+    flex-direction: column; /* stack vertically */
+    gap: 20px;
+    margin-top: 120vh;
+    align-self: center;
+    
+    
+  }
+
+  .info-box {
+    
+    width: 80%; /* shrink to fit small screens */
+    position:static;
+    align-self: center;
+  }
+
+  .background-text {
+    font-size: 100px;
+    width: 100%
+    
+
+  }
+  
+}
+
+@media (min-width: 1024px) {
+  .bottom-section {
+    gap: 600px; /* huge spacing */
+  }
+
+  .info-box {
+    width: 400px;
+    
+  }
+}
+
+
+
+</style>
+</head>
+<body>
+
+<!-- Background HTML text -->
+<div class="background-text top-text">Hello!</div>
+<div id="bottomText" class="background-text bottom-text">I am Amogh</div>
+
+<!-- Your solar system canvas -->
+<canvas id="solarCanvas"></canvas>
+
+<!-- HUD for current simulation date -->
+<div id="hud"></div>
+<div id="scrollText" style="
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: system-ui, sans-serif;
+  font-size: 16px;
+  color: rgb(255, 255, 255,0.5);
+  background: rgba(0,0,0,0.4);
+  padding: 4px 6px;
+  border-radius: 6px;
+  pointer-events: none;
+">
+  Scroll Down !
+</div>
+
+
+<script src="solar-system.js"></script>
+
+<script>
+// --- Scroll-to-time control ---
+let scrollOffset = 0; // in pixels
+const timeSpeedFactor = 10;
+
+window.addEventListener('scroll', () => {
+  scrollOffset = window.scrollY;
+});
+
+</script>
+
+
+
+
+
+<div class="bottom-section">
+  <div class="info-box left-box">
+    <h2>Custom CFD Software</h2>
+    <ul>
+      <li>Physics Olympiad Winner</li>
+      <li>NASA Internship</li>
+      <li>Published Research Paper</li>
+    </ul>
+  </div>
+
+
+
+  <div class="info-box right-box">
+    <h2>Orbit Simulator / Visualizer</h2>
+    <ul>
+      <li>Orbital Mechanics Simulation</li>
+      <li>AI Personal Assistant</li>
+      <li>Personal Website</li>
+    </ul>
+  </div>
+</div>
+
+
+
+</body>
+</html>
