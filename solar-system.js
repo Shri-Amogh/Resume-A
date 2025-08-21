@@ -57,6 +57,11 @@ window.addEventListener('scroll', () => {
   const down1Text = document.querySelector('.down1-text');
   const down2Text = document.querySelector('.down2-text');
   const down3Text = document.querySelector('.down3-text');
+  const down4Text = document.querySelector('.down4-text');
+  const down5Text = document.querySelector('.down5-text');
+  const down6Text = document.querySelector('.down6-text');
+  const down7Text = document.querySelector('.down7-text');
+  const down8Text = document.querySelector('.down8-text');
   
 
 
@@ -69,39 +74,80 @@ window.addEventListener('scroll', () => {
     if (y < 1000) {
         scrollText.textContent = "Keep Scrolling!";
         body.style.backgroundColor = '#000000ff';
-        down1Text.style.filter = 'blur(10px)';
-        down2Text.style.filter = 'blur(10px)';
-        down3Text.style.filter = 'blur(10px)';
-    } else if (y < 1500) {
+        down1Text.style.filter = 'blur(40px)';
+        down2Text.style.filter = 'blur(40px)';
+        down3Text.style.filter = 'blur(40px)';
+        down4Text.style.filter = 'blur(40px)';
+        down5Text.style.filter = 'blur(40px)';
+        down6Text.style.filter = 'blur(40px)';
+        down7Text.style.filter = 'blur(40px)';
+        down8Text.style.filter = 'blur(40px)';
+
+
+
+    } else if (y < 1600) {
         scrollText.textContent = " ";
         body.style.backgroundColor = '#ffffffff';
+
         down1Text.style.filter = 'blur(0px)';
         down2Text.style.filter = 'blur(0px)';
-        down3Text.style.filter = 'blur(10px)';
+        down3Text.style.filter = 'blur(40px)';
 
-    } else if (y < 1800) {
+    } else if (y < 2000) {
         scrollText.textContent = " ";
         body.style.backgroundColor = '#ffffffff';
+
         down1Text.style.filter = 'blur(0px)';
-        down2Text.style.filter = 'blur(10px)';
+        down2Text.style.filter = 'blur(40px)';
         down3Text.style.filter = 'blur(0px)';
+        down4Text.style.filter = 'blur(40px)';
+        down5Text.style.filter = 'blur(40px)';
 
-    } else if (y < 2100) {
+    } else if (y < 2400) {
+        scrollText.textContent = " ";
+        body.style.backgroundColor = '#ffffffff';
+
+        down1Text.style.filter = 'blur(40px)';
+        down3Text.style.filter = 'blur(40px)';
+        down4Text.style.filter = 'blur(0px)';
+        down5Text.style.filter = 'blur(0px)';
+
+// here //
+
+    }  else if (y < 2500) {
+        scrollText.textContent = " ";
+        body.style.backgroundColor = '#ffffffff';
+        
+        down4Text.style.filter = 'blur(40px)';
+        down5Text.style.filter = 'blur(40px)';
+
+
+
+    } else if (y < 2200) {
         scrollText.textContent = " ";
         body.style.backgroundColor = '#ffffffff';
         down1Text.style.filter = 'blur(0px)';
-        down2Text.style.filter = 'blur(10px)';
-        down3Text.style.filter = 'blur(10px)';
+        down2Text.style.filter = 'blur(40px)';
+        down3Text.style.filter = 'blur(40px)';
 
-    }  else {
+    } else if (y < 2200) {
+        scrollText.textContent = " ";
+        body.style.backgroundColor = '#ffffffff';
+        down1Text.style.filter = 'blur(0px)';
+        down2Text.style.filter = 'blur(40px)';
+        down3Text.style.filter = 'blur(40px)';
+
+    } else {
         scrollText.textContent = "";
         body.style.backgroundColor = '#000000ff';
-        down1Text.style.filter = 'blur(10px)';
-        down2Text.style.filter = 'blur(10px)';
-        down3Text.style.filter = 'blur(10px)';
+        down1Text.style.filter = 'blur(40px)';
+        down2Text.style.filter = 'blur(40px)';
+        down3Text.style.filter = 'blur(40px)';
     }
   });
 
+
+  
 
   function fit() {
     canvas.width = Math.max(200, window.innerWidth);
