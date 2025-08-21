@@ -81,13 +81,14 @@ window.addEventListener('scroll', () => {
 
     } else if (y < 1500) {
         scrollText.textContent = " ";
+        body.style.backgroundColor = '#ffffffff';
         down1Text.style.filter = 'blur(0px)';
         down2Text.style.filter = 'blur(10px)';
         down3Text.style.filter = 'blur(0px)';
 
     } else if (y < 1700) {
         scrollText.textContent = " ";
-
+        body.style.backgroundColor = '#ffffffff';
         down1Text.style.filter = 'blur(0px)';
         down2Text.style.filter = 'blur(10px)';
         down3Text.style.filter = 'blur(10px)';
