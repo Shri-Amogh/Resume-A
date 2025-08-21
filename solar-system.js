@@ -11,24 +11,23 @@
 
 
 
-
-
   
+  // sun stuff dont touch
+  function updateSunThreshold() {
+    return window.innerHeight / 2 - 90; // your existing offset
+  }
 
-function updateSunThreshold() {
-  return window.innerHeight / 2 - 90; // your existing offset
-}
+  let sunStickThreshold = updateSunThreshold();
 
-let sunStickThreshold = updateSunThreshold();
-
-// On resize, recalc threshold
-window.addEventListener('resize', () => {
-  sunStickThreshold = updateSunThreshold();
-});
+  // On resize, recalc threshold
+  window.addEventListener('resize', () => {
+    sunStickThreshold = updateSunThreshold();
+  });
 
 // Scroll listener
 window.addEventListener('scroll', () => {
   const isLargeScreen = window.innerWidth >= 768; // adjust breakpoint as needed
+  
 
   if (!isLargeScreen) {
     // On small screens, never stick
@@ -46,28 +45,59 @@ window.addEventListener('scroll', () => {
   }
 });
 
-
-
-
   window.addEventListener('scroll', () => {
     scrollOffset = window.scrollY;
   });
 
 
 
-
+// sccroll effects here 
   const scrollText = document.getElementById('scrollText');
+  const body = document.body;
+  const down1Text = document.querySelector('.down1-text');
+  const down2Text = document.querySelector('.down2-text');
+  const down3Text = document.querySelector('.down3-text');
+  
+
 
   window.addEventListener('scroll', () => {
     const y = window.scrollY;
 
+
+
     // Example: change text after 500px scroll
-    if (y < 1300) {
+    if (y < 1000) {
         scrollText.textContent = "Keep Scrolling!";
+        body.style.backgroundColor = '#000000ff';
+        down1Text.style.filter = 'blur(10px)';
+        down2Text.style.filter = 'blur(10px)';
+        down3Text.style.filter = 'blur(10px)';
+    } else if (y < 2300) {
+        scrollText.textContent = " ";
+        body.style.backgroundColor = '#ffffffff';
+        down1Text.style.filter = 'blur(0px)';
+        down2Text.style.filter = 'blur(0px)';
+        down3Text.style.filter = 'blur(10px)';
+
+    } else if (y < 2700) {
+        scrollText.textContent = " ";
+        down1Text.style.filter = 'blur(0px)';
+        down2Text.style.filter = 'blur(10px)';
+        down3Text.style.filter = 'blur(0px)';
+
     } else if (y < 3200) {
         scrollText.textContent = " ";
-    } else {
-        scrollText.textContent = "Yes, the positions are precise";
+
+        down1Text.style.filter = 'blur(0px)';
+        down2Text.style.filter = 'blur(10px)';
+        down3Text.style.filter = 'blur(10px)';
+
+    }  else {
+        scrollText.textContent = "";
+        body.style.backgroundColor = '#000000ff';
+        down1Text.style.filter = 'blur(10px)';
+        down2Text.style.filter = 'blur(10px)';
+        down3Text.style.filter = 'blur(10px)';
     }
   });
 
@@ -317,17 +347,17 @@ window.addEventListener('scroll', () => {
 
     // --- Sun that grows only in bottom 20% ---
    // Sun
-    const scrollMax = document.body.scrollHeight - window.innerHeight;
-    const triggerPoint = scrollMax * 0.93; 
-    const triggerPoint2 = scrollMax * 0.99;
+    const scrollMax = document.body.scrollHeight ;
+    const triggerPoint = scrollMax * 1.485; 
+    const triggerPoint2 = scrollMax * 1.5;
     let progress = 0;
     let progress2 = 0;
     const sunText = document.getElementById("sunText");
 
     if (scrollOffset >= triggerPoint) {
       // map bottom 20% to [0, 1]
-      progress = Math.min((scrollOffset - triggerPoint) / (scrollMax * 0.45), 1);
-      progress2 = Math.min((scrollOffset - triggerPoint2) / (scrollMax * 0.7), 1);
+      progress = Math.min((scrollOffset - triggerPoint) / (scrollMax *0.05), 1);
+      progress2 = Math.min((scrollOffset - triggerPoint2) / (scrollMax *0.1), 1);
       sunText.style.pointerEvents = "stroke";
       
     } else {
