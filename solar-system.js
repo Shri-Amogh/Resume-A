@@ -72,21 +72,21 @@ window.addEventListener('scroll', () => {
         down1Text.style.filter = 'blur(10px)';
         down2Text.style.filter = 'blur(10px)';
         down3Text.style.filter = 'blur(10px)';
-    } else if (y < 1200) {
+    } else if (y < 1500) {
         scrollText.textContent = " ";
         body.style.backgroundColor = '#ffffffff';
         down1Text.style.filter = 'blur(0px)';
         down2Text.style.filter = 'blur(0px)';
         down3Text.style.filter = 'blur(10px)';
 
-    } else if (y < 1500) {
+    } else if (y < 1800) {
         scrollText.textContent = " ";
         body.style.backgroundColor = '#ffffffff';
         down1Text.style.filter = 'blur(0px)';
         down2Text.style.filter = 'blur(10px)';
         down3Text.style.filter = 'blur(0px)';
 
-    } else if (y < 1700) {
+    } else if (y < 2100) {
         scrollText.textContent = " ";
         body.style.backgroundColor = '#ffffffff';
         down1Text.style.filter = 'blur(0px)';
