@@ -1,4 +1,4 @@
-(() => {
+
   const canvas = document.getElementById('solarCanvas');
   const ctx = canvas.getContext('2d');
   document.body.style.height = "7000px";  // example, adjust as needed
@@ -65,86 +65,91 @@ window.addEventListener('scroll', () => {
   
 
 
+
   window.addEventListener('scroll', () => {
     const y = window.scrollY;
 
+    // A helper function to manage element visibility
+    const setTextState = (element, opacity, blur, visible = false) => {
+        element.style.opacity = opacity;
+        element.style.filter = `blur(${blur}px)`;
+        if (visible) {
+            element.classList.add('visible');
+        } else {
+            element.classList.remove('visible');
+        }
+    };
 
+    // All elements are hidden by default
+    setTextState(down1Text, 0, 40);
+    setTextState(down2Text, 0, 40);
+    setTextState(down3Text, 0, 40);
+    setTextState(down4Text, 0, 40);
+    setTextState(down5Text, 0, 40);
+    setTextState(down6Text, 0, 40);
+    setTextState(down7Text, 0, 40);
+    setTextState(down8Text, 0, 40);
 
-    // Example: change text after 500px scroll
+    // Section 1: Initial black background
     if (y < 1000) {
         scrollText.textContent = "Keep Scrolling!";
         body.style.backgroundColor = '#000000ff';
-        down1Text.style.filter = 'blur(40px)';
-        down2Text.style.filter = 'blur(40px)';
-        down3Text.style.filter = 'blur(40px)';
-        down4Text.style.filter = 'blur(40px)';
-        down5Text.style.filter = 'blur(40px)';
-        down6Text.style.filter = 'blur(40px)';
-        down7Text.style.filter = 'blur(40px)';
-        down8Text.style.filter = 'blur(40px)';
-
-
-
-    } else if (y < 1600) {
+    } 
+    // Section 2: First text group appears
+    else if (y >= 700 && y < 1600) {
         scrollText.textContent = " ";
         body.style.backgroundColor = '#ffffffff';
-
-        down1Text.style.filter = 'blur(0px)';
-        down2Text.style.filter = 'blur(0px)';
-        down3Text.style.filter = 'blur(40px)';
-
-    } else if (y < 2000) {
-        scrollText.textContent = " ";
-        body.style.backgroundColor = '#ffffffff';
-
-        down1Text.style.filter = 'blur(0px)';
-        down2Text.style.filter = 'blur(40px)';
-        down3Text.style.filter = 'blur(0px)';
-        down4Text.style.filter = 'blur(40px)';
-        down5Text.style.filter = 'blur(40px)';
-
-    } else if (y < 2400) {
-        scrollText.textContent = " ";
-        body.style.backgroundColor = '#ffffffff';
-
-        down1Text.style.filter = 'blur(40px)';
-        down3Text.style.filter = 'blur(40px)';
-        down4Text.style.filter = 'blur(0px)';
-        down5Text.style.filter = 'blur(0px)';
-
-// here //
-
-    }  else if (y < 2500) {
-        scrollText.textContent = " ";
-        body.style.backgroundColor = '#ffffffff';
+        setTextState(down1Text, 1, 0);
+        setTextState(down2Text, 1, 0);
         
-        down4Text.style.filter = 'blur(40px)';
-        down5Text.style.filter = 'blur(40px)';
-
-
-
-    } else if (y < 2200) {
-        scrollText.textContent = " ";
+    } 
+    // Section 3: "Einstein" text appears, others disappear
+    else if (y >= 1600 && y < 2000) {
         body.style.backgroundColor = '#ffffffff';
-        down1Text.style.filter = 'blur(0px)';
-        down2Text.style.filter = 'blur(40px)';
-        down3Text.style.filter = 'blur(40px)';
-
-    } else if (y < 2200) {
-        scrollText.textContent = " ";
-        body.style.backgroundColor = '#ffffffff';
-        down1Text.style.filter = 'blur(0px)';
-        down2Text.style.filter = 'blur(40px)';
-        down3Text.style.filter = 'blur(40px)';
-
-    } else {
-        scrollText.textContent = "";
-        body.style.backgroundColor = '#000000ff';
-        down1Text.style.filter = 'blur(40px)';
-        down2Text.style.filter = 'blur(40px)';
-        down3Text.style.filter = 'blur(40px)';
+        setTextState(down1Text, 1, 0);
+        setTextState(down2Text, 0, 40);
+        setTextState(down3Text, 1, 0);
     }
-  });
+    // Section 4: "Cool stuff" text appears
+    else if (y >= 2000 && y < 2400) {
+        body.style.backgroundColor = '#ffffffff';
+        setTextState(down2Text, 0, 40);
+        setTextState(down3Text, 0, 40);
+        setTextState(down4Text, 1, 0);
+    } 
+    // Section 5: CFD software text appears
+    else if (y >= 2400 && y < 2900) {
+        body.style.backgroundColor = '#ffffffff';
+        setTextState(down4Text, 0, 40);
+        setTextState(down5Text, 1, 0, true);
+    } 
+    // Section 6: Orbital Mechanics text appears
+    else if (y >= 2900 && y < 3400) {
+        body.style.backgroundColor = '#ffffffff';
+        setTextState(down5Text, 0, 40, false);
+        setTextState(down6Text, 1, 0, true);
+    } 
+    // Section 7: AI Assistant text appears
+    else if (y >= 3400 && y < 3900) {
+        body.style.backgroundColor = '#ffffffff';
+        setTextState(down6Text, 0, 40, false);
+        setTextState(down7Text, 1, 0);
+    } 
+    // Section 8: Resume and LinkedIn text appears
+    else if (y >= 3900 && y < 4400) {
+        body.style.backgroundColor = '#ffffffff';
+        setTextState(down7Text, 0, 40);
+        setTextState(down8Text, 1, 0);
+    } 
+    // Section 9: End section, return to black background
+    else {
+        scrollText.textContent = "Yes, the positions are precise";
+        body.style.backgroundColor = '#000000ff';
+        setTextState(down8Text, 0, 40);
+        setTextState(down5Text, 0, 40, false); 
+    }
+});
+
 
 
   
@@ -326,122 +331,124 @@ window.addEventListener('scroll', () => {
   const drawListOrder = ['Eris','Makemake','Haumea','Pluto','Neptune','Uranus','Saturn','Jupiter','Ceres','Mars','Earth','Venus','Mercury'];
 
   function drawFrame() {
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    const now = new Date();
-    const date = new Date(now.getTime() + scrollOffset * timeSpeedFactor * 86400000);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  const now = new Date();
+  const date = new Date(now.getTime() + scrollOffset * timeSpeedFactor * 86400000);
 
-    const JDnow = jdOf(date);
-    const { cx, cy } = { cx: canvas.width/2, cy: canvas.height/2 };
+  const JDnow = jdOf(date);
+  const { cx, cy } = { cx: canvas.width / 2, cy: canvas.height / 2 };
 
-   
-
-
-
-    // Draw orbits (outer-first so inner draw on top)
-    for (const name of drawListOrder) {
-      drawOrbit(elements[name], date);
-    }
-
-    // Draw bodies
-    for (const name of drawListOrder.slice().reverse()) {
-      const elem = elements[name];
-      const P = heliocentricFrom6(elem, date);
-      const R = Math.sqrt(P.x*P.x + P.y*P.y + P.z*P.z);
-      const k = R>0 ? (logScale(R)/R) : 0;
-      const sx = cx + P.x * k;
-      const sy = cy + P.y * k;
-      const s = style.bodies[name] || { color:'#ddd', r:3 };
-      ctx.beginPath();
-      ctx.arc(sx, sy, s.r, 0, Math.PI*2);
-      ctx.fillStyle = s.color;
-      ctx.fill();
-
-      // label
-      ctx.fillStyle = style.labelColor;
-      ctx.font = '12px system-ui, -apple-system, "Segoe UI", Roboto';
-      ctx.textAlign = 'left';
-      ctx.textBaseline = 'middle';
-      ctx.fillText(name, sx + s.r + 6, sy);
-    }
-
-    // Moon (simple sidereal around Earth, log scaled)
-    (function(){
-      const earthElem = elements.Earth;
-      const earthP = heliocentricFrom6(earthElem, date);
-      const Re = Math.sqrt(earthP.x*earthP.x + earthP.y*earthP.y + earthP.z*earthP.z);
-      const k = Re>0 ? (logScale(Re)/Re) : 0;
-      const ex = cx + earthP.x * k;
-      const ey = cy + earthP.y * k;
-
-      const moonAU = 0.02057; // mean semi-major moon in AU
-      const moonPeriodDays = 27.321661;
-      const days = daysSinceJ2000(date);
-      const Mmoon = 2*Math.PI * ((days % moonPeriodDays) / moonPeriodDays);
-      const mx = ex + logScale(moonAU) * Math.cos(Mmoon);
-      const my = ey + logScale(moonAU) * Math.sin(Mmoon);
-
-      ctx.beginPath();
-      ctx.strokeStyle = 'rgba(180,180,200,0.18)'; 
-      ctx.arc(ex, ey, logScale(moonAU), 0, Math.PI*2);
-      ctx.stroke();
-
-      ctx.beginPath();
-      ctx.fillStyle = '#ddd';
-      ctx.arc(mx, my, 2, 0, Math.PI*2);
-      ctx.fill();
-    })();
-
-
-    // --- Sun that grows only in bottom 20% ---
-   // Sun
-    const scrollMax = document.body.scrollHeight ;
-    const triggerPoint = scrollMax * 1.485; 
-    const triggerPoint2 = scrollMax * 1.5;
-    let progress = 0;
-    let progress2 = 0;
-    const sunText = document.getElementById("sunText");
-
-    if (scrollOffset >= triggerPoint) {
-      // map bottom 20% to [0, 1]
-      progress = Math.min((scrollOffset - triggerPoint) / (scrollMax *0.05), 1);
-      progress2 = Math.min((scrollOffset - triggerPoint2) / (scrollMax *0.1), 1);
-      sunText.style.pointerEvents = "stroke";
-      
-    } else {
-      sunText.style.pointerEvents = "none";
-    }
-
-    const baseRadius = 18;
-    const maxRadius = Math.max(canvas.width, canvas.height) * 0.55;
-    const sunRadius = baseRadius + (maxRadius - baseRadius) * progress;
-
-    ctx.beginPath();
-    ctx.arc(cx, cy, sunRadius, 0, Math.PI * 2);
-    ctx.fillStyle = '#fbbf24';
-    ctx.shadowColor = '#fbbf24';
-    ctx.shadowBlur = 50 * progress ;
-    ctx.fill();
-    ctx.shadowBlur = 0;
-
-    // fade in sun text
-    
-    sunText.style.opacity = progress2 ;
-    
-
-    // HUD update
-    document.getElementById('hud').textContent =
-      date.toISOString().replace('T', ' ').replace('Z', ' UTC');
-
-    // one animation loop call only
-    requestAnimationFrame(drawFrame);
-
+  // Draw orbits (outer-first so inner draw on top)
+  for (const name of drawListOrder) {
+    drawOrbit(elements[name], date);
   }
 
-  // kick off
-  drawFrame();
+  // Draw bodies
+  for (const name of drawListOrder.slice().reverse()) {
+    const elem = elements[name];
+    const P = heliocentricFrom6(elem, date);
+    const R = Math.sqrt(P.x * P.x + P.y * P.y + P.z * P.z);
+    const k = R > 0 ? (logScale(R) / R) : 0;
+    const sx = cx + P.x * k;
+    const sy = cy + P.y * k;
+    const s = style.bodies[name] || { color: '#ddd', r: 3 };
+    ctx.beginPath();
+    ctx.arc(sx, sy, s.r, 0, Math.PI * 2);
+    ctx.fillStyle = s.color;
+    ctx.fill();
 
-  // Expose for debugging in console:
-  window._SSS_elements = elements;
-  window._SSS_heliocentricFrom6 = heliocentricFrom6;
+    // label
+    ctx.fillStyle = style.labelColor;
+    ctx.font = '12px system-ui, -apple-system, "Segoe UI", Roboto';
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(name, sx + s.r + 6, sy);
+  }
 
-})();
+  // Moon (simple sidereal around Earth, log scaled)
+  (function () {
+    const earthElem = elements.Earth;
+    const earthP = heliocentricFrom6(earthElem, date);
+    const Re = Math.sqrt(earthP.x * earthP.x + earthP.y * earthP.y + earthP.z * earthP.z);
+    const k = Re > 0 ? (logScale(Re) / Re) : 0;
+    const ex = cx + earthP.x * k;
+    const ey = cy + earthP.y * k;
+
+    const moonAU = 0.02057; // mean semi-major moon in AU
+    const moonPeriodDays = 27.321661;
+    const days = daysSinceJ2000(date);
+    const Mmoon = 2 * Math.PI * ((days % moonPeriodDays) / moonPeriodDays);
+    const mx = ex + logScale(moonAU) * Math.cos(Mmoon);
+    const my = ey + logScale(moonAU) * Math.sin(Mmoon);
+
+    ctx.beginPath();
+    ctx.strokeStyle = 'rgba(180,180,200,0.18)';
+    ctx.arc(ex, ey, logScale(moonAU), 0, Math.PI * 2);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.fillStyle = '#ddd';
+    ctx.arc(mx, my, 2, 0, Math.PI * 2);
+    ctx.fill();
+  })();
+
+  // --- Sun that grows only in bottom 20% ---
+  // Sun
+  const totalScrollHeight = document.body.scrollHeight - window.innerHeight; // This is the fix!
+  const triggerPoint = totalScrollHeight * 0.90; // Start growing the sun in the last 10% of the scroll
+  const triggerPoint2 = totalScrollHeight * 0.93; // Start fading in the text in the last 4% of the scroll
+  let progress = 0;
+  let progress2 = 0;
+  const sunText = document.getElementById("sunText");
+
+  // Check if the user is in the sun animation zone
+  if (window.scrollY >= triggerPoint) {
+    // Calculate the progress of the sun's growth, from 0 to 1
+    progress = Math.min((window.scrollY - triggerPoint) / (totalScrollHeight - triggerPoint), 1);
+
+    // Calculate the progress for the text fade-in
+    // This is a separate, shorter range for a more dramatic effect
+    if (window.scrollY >= triggerPoint2) {
+      progress2 = Math.min((window.scrollY - triggerPoint2) / (totalScrollHeight - triggerPoint2), 1);
+    } else {
+      progress2 = 0;
+    }
+
+    // Make the text clickable when it starts to appear
+    sunText.style.pointerEvents = "auto";
+  } else {
+    // If not in the animation zone, reset everything
+    sunText.style.pointerEvents = "none";
+    progress = 0;
+    progress2 = 0;
+  }
+
+  const baseRadius = 18;
+  const maxRadius = Math.max(canvas.width, canvas.height) * 0.55;
+  const sunRadius = baseRadius + (maxRadius - baseRadius) * progress;
+
+  ctx.beginPath();
+  ctx.arc(cx, cy, sunRadius, 0, Math.PI * 2);
+  ctx.fillStyle = '#fbbf24';
+  ctx.shadowColor = '#fbbf24';
+  ctx.shadowBlur = 50 * progress;
+  ctx.fill();
+  ctx.shadowBlur = 0;
+
+  // Fade in the sun text using the progress2 value
+  sunText.style.opacity = progress2;
+
+  // HUD update
+  document.getElementById('hud').textContent =
+    date.toISOString().replace('T', ' ').replace('Z', ' UTC');
+
+  // one animation loop call only
+  requestAnimationFrame(drawFrame);
+}
+
+// kick off
+drawFrame();
+
+// Expose for debugging in console:
+window._SSS_elements = elements;
+window._SSS_heliocentricFrom6 = heliocentricFrom6;

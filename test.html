@@ -20,7 +20,7 @@
     /* Put the canvas on top */
     canvas {  
       position: fixed; /* keep canvas visible while scrolling */
-      top: 0;
+      top: 0; 
       left: 0;
       width: 100%;
       height: 100%;
@@ -67,6 +67,13 @@
     }
 
 /* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<   */
+    .project-link {
+    text-decoration: none;
+    color: inherit;
+    pointer-events: none;  /* Initially non-clickable */
+    transition: pointer-events 0s linear 0.7s;  /* Delay disabling clickability */
+}
+
 
     .down1-text {
       position: fixed;
@@ -80,75 +87,124 @@
       width: 100%;   
 
       filter: blur(40px); /* Initial blur state */
-      transition: filter 0.7s ease;
+      opacity: 0;
+      transition: filter 0.7s ease, opacity 0.7s ease;
     }
 
     .down2-text {
       position: fixed;
       color: rgba(34, 34, 34, 0.5);
       text-align: left;
-      left:5%;
+      left:4%;
       font-size: 29px;
-      bottom: 8vh;
+      bottom: 10vh;
       font-weight: 700;
 
       filter: blur(40px); /* Initial blur state */
-      transition: filter 0.7s ease;
+      opacity: 0;
+      transition: filter 0.7s ease, opacity 0.7s ease;
     }
 
     .down3-text {
       position: fixed;
       color: rgba(34, 34, 34, 0.5);
       text-align: left;
-      left:5%;
+      left:4%;
       font-size: 29px;
       bottom: 11vh;
       font-weight: 700;
 
       filter: blur(40px); /* Initial blur state */
-      transition: filter 0.7s ease;
+      opacity: 0;
+      transition: filter 0.7s ease, opacity 0.7s ease;
     }
 
       .down4-text {
       position: fixed;
       color: rgba(34, 34, 34, 0.5);
       text-align: center;
-      /*left:0%;*/
+      left:4%;
       font-size: 32px;
-      top: 5vh;
+      top: 12vh;
       font-weight: 700;
 
       filter: blur(40px); /* Initial blur state */
-      transition: filter 0.7s ease;
+      opacity: 0;
+      transition: filter 0.7s ease, opacity 0.7s ease;
     }
 
-
-      .down5-text {
+    .down5-text {
+      z-index: 3;
       position: fixed;
-      color: rgba(34, 34, 34, 0.5);
+      left: 10%;
+      width: 80%; /* adjust as needed */
       text-align: center;
-      left: 5%;
-      font-size: 29px;
-      top: 22vh;
-      font-weight: 700;
-
-      filter: blur(40px); /* Initial blur state */
-      transition: filter 0.7s ease;
-    }
-
-
-      .down6-text {
-      position: fixed;
       color: rgba(34, 34, 34, 0.5);
-      text-align: left;
-      left:5%;
-      font-size: 29px;
-      bottom: 8vh;
       font-weight: 700;
-
-      filter: blur(40px); /* Initial blur state */
-      transition: filter 0.7s ease;
+      filter: blur(40px);
+      opacity: 0;
+      transition: filter 0.7s ease, opacity 0.7s ease;
     }
+
+    /* Top heading */
+    .down5-heading {
+      position: fixed;
+      top: 9vh;  /* stays near top */
+      font-size: 40px;
+      animation: pulse 2s infinite ease-in-out;  /* Added animation */
+    text-decoration: underline;  /* Keep the underline */
+    }
+
+    /* Bottom blurb */
+    .down5-blurb {
+      position: fixed;
+      text-align: justify;
+      left: 3.5%;
+      bottom: -98vh; /* sticks near bottom */
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+    .down5-text.visible .project-link {
+    pointer-events: auto;
+}
+
+
+    .down6-text {
+      z-index: 3;
+      position: fixed;
+      left: 10%;
+      width: 80%; /* adjust as needed */
+      text-align: center;
+      color: rgba(34, 34, 34, 0.5);
+      font-weight: 700;
+      filter: blur(40px);
+      opacity: 0;
+      transition: filter 0.7s ease, opacity 0.7s ease;
+    }
+
+    /* Top heading */
+    .down6-heading {
+      position: fixed;
+      top: 9vh;  /* stays near top */
+      font-size: 35px;
+      animation: pulse 2s infinite ease-in-out;  /* Added animation */
+    text-decoration: underline;  /* Keep the underline */
+    }
+
+    /* Bottom blurb */
+    .down6-blurb {
+      position: fixed;
+      text-align: justify;
+      left: 3%;
+      bottom: -94vh; /* sticks near bottom */
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+    .down6-text.visible .project-link {
+    pointer-events: auto;
+}
 
 
       .down7-text {
@@ -161,7 +217,8 @@
       font-weight: 700;
 
       filter: blur(40px); /* Initial blur state */
-      transition: filter 0.7s ease;
+      opacity: 0;
+      transition: filter 0.7s ease, opacity 0.7s ease;
     }
 
       .down8-text {
@@ -174,7 +231,8 @@
       font-weight: 700;
 
       filter: blur(40px); /* Initial blur state */
-      transition: filter 0.7s ease;
+      opacity: 0;
+      transition: filter 0.7s ease, opacity 0.7s ease;
     }
 
 
@@ -234,7 +292,11 @@
 }
 
 /* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<   */
-
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
 
 /* Responsive for phones */
 @media (max-width: 700px) {
@@ -324,37 +386,55 @@
 
 
 <div class="down2-text">
-  "The most beautiful thing we can experience is the mysterious."
-</div>
-
-
-<div class="down3-text">
+  "The most beautiful thing we can experience is the mysterious."<br>
   - Albert Einstein
 </div>
 
 
+<div class="down3-text">  
+  and what a mysterious thing to study Physics.
+</div>
+
+
 <div class="down4-text">
-  Here is some cool stuff I built.
+  Here are some of my projects...
 </div>
 
 <!-- about done, need to add the desc in this, only done till here-->
 <div class="down5-text">
-  Custom CFD software
+  <a href="https://github.com/Shri-Amogh/Aero_Optimization_CFD" target="_blank" class="project-link">
+    <div class="down5-heading">Custom CFD software</div>
+  </a>
+  <div class="down5-blurb">
+    <p>
+      The project combines advanced computational fluid dynamics (CFD) with optimization algorithms to automatically evolve aerodynamic shapes for improved performance. Its uniqueness lies in bridging physics-based simulation with AI-driven optimization, delivering both engineering accuracy and computational efficiency.
+    </p>
+  </div>
 </div>
 
 
+
+
+
 <div class="down6-text">
-  Simulated Orbital Mechanics 
+  <a href="https://github.com/Shri-Amogh/Orbit_Sim" target="_blank" class="project-link">
+    <div class="down6-heading">Simulated Mechanic Orbital Predictor</div>
+  </a>
+  <div class="down6-blurb">
+    <p>
+      Python based project that incorporates realistic perturbations like Earth's J2 gravitational anomalies and atmospheric drag, while also supporting orbital maneuvers such as Hohmann transfers. TLE compatible
+    </p>
+  </div>
 </div>
 
 
 <div class="down7-text">
-  Custom AI Assistant
+  fill this with the biophysics research and the use of the 
 </div>
  
 
 <div class="down8-text">
-  Custom AI Assistant
+  FILL THIS PLACE WITH DOCUMENT LEADING TO RESUME AND LINKEDIN
 </div>
  
 
@@ -405,6 +485,7 @@ window.addEventListener('scroll', () => {
 
 
 
+<!-- 
 <div class="bottom-section">
   <div class="info-box left-box">
     <h2>Custom CFD Software</h2>
@@ -428,7 +509,7 @@ window.addEventListener('scroll', () => {
 </div>
 
 
-
+-->  
 
 
 
