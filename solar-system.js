@@ -126,7 +126,7 @@
     else {
         scrollText.textContent = "Yes, the positions are precise";
         body.style.backgroundColor = '#000000ff';
-        setTextState(down8Text, 0, 40, false);
+        setTextState(down8Text, 0, 40);
         setTextState(down5Text, 0, 40, false); 
     }
 });
@@ -403,7 +403,7 @@
 
   // Keep canvas below interactive links and the sunText below links as well.
   // (Project links should have z-index: 3 in CSS; we place sunText at 2.)
-  
+  if (canvas && canvas.style) canvas.style.zIndex = '1';
   if (sunText && sunText.style) {
     sunText.style.zIndex = '2';
     sunText.style.opacity = String(progress2);

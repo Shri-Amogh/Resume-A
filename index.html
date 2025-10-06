@@ -13,7 +13,7 @@
       background: rgb(0, 0, 0);
       overflow-y: scroll; /* allow vertical scrolling */
       font-family: Arial, sans-serif;
-
+      height: 300vh; /* make page taller so you can scroll */
       transition: background 0.7s ease;
     }
 
@@ -24,9 +24,8 @@
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: 1;
+      z-index: 2;
       display: block;
-      pointer-events: none;
     }
 
     /* Background text */
@@ -69,30 +68,15 @@
 
 /* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<   */
     .project-link {
-    text-decoration: underline; /* regular underline */
+    text-decoration: none;
     color: inherit;
-    pointer-events: none;       /* disabled by default */
-    position: relative;
-    z-index: 101;                 /* above the canvas */
-}
-
-/* Change z-index to a very high, safe value like 10 or 100 */
-.down5-text,
-.down6-text,
-.down7-text,
-.down8-text {
-    z-index: 100; /* Set a definitive high z-index */
-    position: fixed;         /* keep existing positioning */
+    pointer-events: none;  /* Initially non-clickable */
+    transition: pointer-events 0s linear 0.7s;  /* Delay disabling clickability */
 }
 
 
 
-.down5-text.visible .project-link,
-.down6-text.visible .project-link,
-.down7-text.visible .project-link,
-.down8-text.visible .project-link {
-    pointer-events: auto;
-}
+
 
 .down1-text {
   position: fixed;
@@ -295,6 +279,9 @@
   transition: filter 0.7s ease, opacity 0.7s ease;
   animation: pulse 5s infinite ease-in-out;
   text-decoration: underline;
+}
+.down8-text.visible .project-link {
+  pointer-events: auto;
 }
 /* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<   */
 
