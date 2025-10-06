@@ -114,19 +114,19 @@
     else if (y >= 2200 && y < 2500) {
         body.style.backgroundColor = '#ffffffff';
         setTextState(down6Text, 0, 40, false);
-        setTextState(down7Text, 1, 0);
+        setTextState(down7Text, 1, 0, true);
     } 
     // Section 8: Resume and LinkedIn text appears
     else if (y >= 2500 && y < 3200) {
         body.style.backgroundColor = '#ffffffff';
-        setTextState(down7Text, 0, 40);
-        setTextState(down8Text, 1, 0);
+        setTextState(down7Text, 0, 40, false);
+        setTextState(down8Text, 1, 0, true);
     } 
     // Section 9: End section, return to black background
     else {
         scrollText.textContent = "Yes, the positions are precise";
         body.style.backgroundColor = '#000000ff';
-        setTextState(down8Text, 0, 40);
+        setTextState(down8Text, 0, 40, false);
         setTextState(down5Text, 0, 40, false); 
     }
 });
@@ -373,35 +373,43 @@
     ctx.fill();
   })();
 
+// ...existing code...
   // --- Sun that grows only in bottom 20% ---
   // Sun
-  const totalScrollHeight = document.body.scrollHeight - window.innerHeight; // This is the fix!
-  const triggerPoint = totalScrollHeight * 0.90; // Start growing the sun in the last 10% of the scroll
-  const triggerPoint2 = totalScrollHeight * 0.93; // Start fading in the text in the last 4% of the scroll
+  // Use scrollOffset (kept up-to-date by the scroll listener) instead of window.scrollY,
+  // guard against zero height, and ensure the sunText doesn't block links by keeping its
+  // z-index below project links and only enabling pointer-events when the text is visibly shown.
+  const totalScrollHeight = Math.max(1, document.body.scrollHeight - window.innerHeight);
+  const triggerPoint = totalScrollHeight * 0.90;   // start growing the sun in the last 10%
+  const triggerPoint2 = totalScrollHeight * 0.93;  // start fading in the text a bit later
+
   let progress = 0;
   let progress2 = 0;
   const sunText = document.getElementById("sunText");
 
-  // Check if the user is in the sun animation zone
-  if (window.scrollY >= triggerPoint) {
-    // Calculate the progress of the sun's growth, from 0 to 1
-    progress = Math.min((window.scrollY - triggerPoint) / (totalScrollHeight - triggerPoint), 1);
+  // Calculate progress using the global scrollOffset
+  if (scrollOffset >= triggerPoint) {
+    progress = Math.min((scrollOffset - triggerPoint) / (totalScrollHeight - triggerPoint), 1);
 
-    // Calculate the progress for the text fade-in
-    // This is a separate, shorter range for a more dramatic effect
-    if (window.scrollY >= triggerPoint2) {
-      progress2 = Math.min((window.scrollY - triggerPoint2) / (totalScrollHeight - triggerPoint2), 1);
+    if (scrollOffset >= triggerPoint2) {
+      progress2 = Math.min((scrollOffset - triggerPoint2) / (totalScrollHeight - triggerPoint2), 1);
     } else {
       progress2 = 0;
     }
-
-    // Make the text clickable when it starts to appear
-    sunText.style.pointerEvents = "auto";
   } else {
-    // If not in the animation zone, reset everything
-    sunText.style.pointerEvents = "none";
     progress = 0;
     progress2 = 0;
+  }
+
+  // Keep canvas below interactive links and the sunText below links as well.
+  // (Project links should have z-index: 3 in CSS; we place sunText at 2.)
+  
+  if (sunText && sunText.style) {
+    sunText.style.zIndex = '2';
+    sunText.style.opacity = String(progress2);
+    // Only allow pointer events when the sun text is clearly visible,
+    // so it doesn't block other clickable content during fade-in/out.
+    sunText.style.pointerEvents = progress2 > 0.25 ? 'auto' : 'none';
   }
 
   const baseRadius = 18;
@@ -415,7 +423,8 @@
   ctx.shadowBlur = 50 * progress;
   ctx.fill();
   ctx.shadowBlur = 0;
-
+  
+// ...existing code...
   // Fade in the sun text using the progress2 value
   sunText.style.opacity = progress2;
 
