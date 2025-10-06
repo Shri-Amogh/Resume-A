@@ -1,7 +1,7 @@
 
   const canvas = document.getElementById('solarCanvas');
   const ctx = canvas.getContext('2d');
-  document.body.style.height = "7000px";  // example, adjust as needed
+  document.body.style.height = "5000px";  // example, adjust as needed
 
 
   let scrollOffset = 0;       // scroll position in pixels
@@ -24,26 +24,7 @@
     sunStickThreshold = updateSunThreshold();
   });
 
-// Scroll listener
-window.addEventListener('scroll', () => {
-  const isLargeScreen = window.innerWidth >= 768; // adjust breakpoint as needed
-  
 
-  if (!isLargeScreen) {
-    // On small screens, never stick
-    bottomText.classList.remove('stuck');
-    bottomText.style.top = '';
-    return;
-  }
-
-  if (window.scrollY >= sunStickThreshold) {
-    bottomText.classList.add('stuck');
-    bottomText.style.top = '55%'; // your Sun position
-  } else {
-    bottomText.classList.remove('stuck');
-    bottomText.style.top = '';
-  }
-});
 
   window.addEventListener('scroll', () => {
     scrollOffset = window.scrollY;
@@ -91,12 +72,12 @@ window.addEventListener('scroll', () => {
     setTextState(down8Text, 0, 40);
 
     // Section 1: Initial black background
-    if (y < 1000) {
+    if (y < 700) {
         scrollText.textContent = "Keep Scrolling!";
         body.style.backgroundColor = '#000000ff';
     } 
     // Section 2: First text group appears
-    else if (y >= 700 && y < 1600) {
+    else if (y >= 700 && y < 1000) {
         scrollText.textContent = " ";
         body.style.backgroundColor = '#ffffffff';
         setTextState(down1Text, 1, 0);
@@ -104,39 +85,39 @@ window.addEventListener('scroll', () => {
         
     } 
     // Section 3: "Einstein" text appears, others disappear
-    else if (y >= 1600 && y < 2000) {
+    else if (y >= 1000 && y < 1300) {
         body.style.backgroundColor = '#ffffffff';
         setTextState(down1Text, 1, 0);
         setTextState(down2Text, 0, 40);
         setTextState(down3Text, 1, 0);
     }
     // Section 4: "Cool stuff" text appears
-    else if (y >= 2000 && y < 2400) {
+    else if (y >= 1300 && y < 1600) {
         body.style.backgroundColor = '#ffffffff';
         setTextState(down2Text, 0, 40);
         setTextState(down3Text, 0, 40);
         setTextState(down4Text, 1, 0);
     } 
     // Section 5: CFD software text appears
-    else if (y >= 2400 && y < 2900) {
+    else if (y >= 1600 && y < 1900) {
         body.style.backgroundColor = '#ffffffff';
         setTextState(down4Text, 0, 40);
         setTextState(down5Text, 1, 0, true);
     } 
     // Section 6: Orbital Mechanics text appears
-    else if (y >= 2900 && y < 3400) {
+    else if (y >= 1900 && y < 2200) {
         body.style.backgroundColor = '#ffffffff';
         setTextState(down5Text, 0, 40, false);
         setTextState(down6Text, 1, 0, true);
     } 
     // Section 7: AI Assistant text appears
-    else if (y >= 3400 && y < 3900) {
+    else if (y >= 2200 && y < 2500) {
         body.style.backgroundColor = '#ffffffff';
         setTextState(down6Text, 0, 40, false);
         setTextState(down7Text, 1, 0);
     } 
     // Section 8: Resume and LinkedIn text appears
-    else if (y >= 3900 && y < 4400) {
+    else if (y >= 2500 && y < 3200) {
         body.style.backgroundColor = '#ffffffff';
         setTextState(down7Text, 0, 40);
         setTextState(down8Text, 1, 0);
